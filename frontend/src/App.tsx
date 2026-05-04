@@ -4,6 +4,7 @@ import FalabellaView from "./components/FalabellaView";
 import LenovoView from "./components/lenovo";
 import TecnoclifeView from "./components/tecnolife";
 import Ebay from "./components/ebay";
+import InformacionView from "./components/informationView";
 
 const GLOBAL_STYLES = `
   @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
@@ -377,17 +378,17 @@ function Home() {
   const logoPath = "/logo_scrapeflow.png";
 
   const tiendas = [
-    { key: "Falabella",  label: "Falabella",  subtitle: "Comparativa de portátiles", icon: <Database size={18} />,    color: "#00e5a0", bg: "rgba(0,229,160,0.1)",   cssColor: "rgba(0,229,160,0.35)",  num: "01" },
-    { key: "Lenovo",     label: "Lenovo",     subtitle: "ThinkPads oficiales",        icon: <ShieldCheck size={18} />, color: "#38bdf8", bg: "rgba(56,189,248,0.1)",  cssColor: "rgba(56,189,248,0.35)", num: "02" },
-    { key: "Ebay",       label: "Ebay",       subtitle: "Hardware internacional",     icon: <Globe size={18} />,       color: "#a78bfa", bg: "rgba(167,139,250,0.1)", cssColor: "rgba(167,139,250,0.35)",num: "03" },
-    { key: "Tecnoclife", label: "Tecnoclife", subtitle: "Stock nacional",             icon: <Zap size={18} />,         color: "#00e5a0", bg: "rgba(0,229,160,0.1)",   cssColor: "rgba(0,229,160,0.35)",  num: "04" },
+    { key: "Falabella", label: "Falabella", subtitle: "Comparativa de portátiles", icon: <Database size={18} />, color: "#00e5a0", bg: "rgba(0,229,160,0.1)", cssColor: "rgba(0,229,160,0.35)", num: "01" },
+    { key: "Lenovo", label: "Lenovo", subtitle: "ThinkPads oficiales", icon: <ShieldCheck size={18} />, color: "#38bdf8", bg: "rgba(56,189,248,0.1)", cssColor: "rgba(56,189,248,0.35)", num: "02" },
+    { key: "Ebay", label: "Ebay", subtitle: "Hardware internacional", icon: <Globe size={18} />, color: "#a78bfa", bg: "rgba(167,139,250,0.1)", cssColor: "rgba(167,139,250,0.35)", num: "03" },
+    { key: "Tecnoclife", label: "Tecnoclife", subtitle: "Stock nacional", icon: <Zap size={18} />, color: "#00e5a0", bg: "rgba(0,229,160,0.1)", cssColor: "rgba(0,229,160,0.35)", num: "04" },
   ];
 
   const features = [
-    { icon: <RefreshCw size={22} />, label: "Tiempo real",        desc: "Feeds en vivo desde cada distribuidor activo.",   tag: "LIVE" },
-    { icon: <BarChart2 size={22} />, label: "Análisis cruzado",   desc: "Compara specs y precios entre todas las fuentes.", tag: "AI" },
-    { icon: <Package size={22} />,   label: "Control de stock",   desc: "Alertas de disponibilidad e inventario en tiempo.",tag: "AUTO" },
-    { icon: <Database size={22} />,  label: "Exportación directa",desc: "Reportes estructurados listos para auditoría.",    tag: "PRO" },
+    { icon: <RefreshCw size={22} />, label: "Tiempo real", desc: "Feeds en vivo desde cada distribuidor activo.", tag: "LIVE" },
+    { icon: <BarChart2 size={22} />, label: "Análisis cruzado", desc: "Compara specs y precios entre todas las fuentes.", tag: "AI" },
+    { icon: <Package size={22} />, label: "Control de stock", desc: "Alertas de disponibilidad e inventario en tiempo.", tag: "AUTO" },
+    { icon: <Database size={22} />, label: "Exportación directa", desc: "Reportes estructurados listos para auditoría.", tag: "PRO" },
   ];
 
   const renderLanding = () => (
@@ -418,7 +419,7 @@ function Home() {
         {/* RIGHT */}
         <div className="sf-right">
           <div className="sf-panel-header">
-            <div className="sf-panel-title">Selecciona una fuente<br/>de datos</div>
+            <div className="sf-panel-title">Selecciona una fuente<br />de datos</div>
           </div>
 
           <div className="sf-store-grid">
@@ -454,7 +455,7 @@ function Home() {
           <div className="sf-feat-top">
             <div>
               <div className="sf-feat-kicker">// CAPACIDADES</div>
-              <h2 className="sf-feat-h2">Monitoreo <em>inteligente</em><br/>del mercado tech</h2>
+              <h2 className="sf-feat-h2">Monitoreo <em>inteligente</em><br />del mercado tech</h2>
             </div>
             <div className="sf-feat-right-meta">
               <div className="sf-feat-big-num">04</div>
@@ -469,7 +470,7 @@ function Home() {
                   <div className="sf-feat-name">{f.label}</div>
                   <p className="sf-feat-desc">{f.desc}</p>
                 </div>
-                <span className="sf-feat-card-num">0{i+1}</span>
+                <span className="sf-feat-card-num">0{i + 1}</span>
               </div>
             ))}
           </div>
@@ -480,11 +481,12 @@ function Home() {
 
   const renderVista = () => {
     switch (tiendaSeleccionada) {
-      case "Falabella":  return <FalabellaView />;
-      case "Lenovo":     return <LenovoView />;
-      case "Ebay":       return <Ebay />;
+      case "Falabella": return <FalabellaView />;
+      case "Lenovo": return <LenovoView />;
+      case "Ebay": return <Ebay />;
       case "Tecnoclife": return <TecnoclifeView />;
-      default:           return renderLanding();
+      case "Información": return <InformacionView />;
+      default: return renderLanding();
     }
   };
 
@@ -512,7 +514,10 @@ function Home() {
               Dashboard
             </button>
             <div className="sf-nav-divider" />
-            <button className="sf-nav-btn-info">
+            <button
+              className={`sf-nav-btn-info ${tiendaSeleccionada === "Información" ? "active" : ""}`}
+              onClick={() => setTiendaSeleccionada("Información")}
+            >
               <Info size={13} />
               Información
             </button>
