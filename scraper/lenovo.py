@@ -3,7 +3,7 @@ import requests
 from playwright.async_api import async_playwright
 
 def enviar_a_backend(productos):
-    url = "http://backend_api:3000/productos"
+    url = "http://localhost:3000/productos"
     for producto in productos:
         try:
             if not producto.get("url"): continue
@@ -14,7 +14,7 @@ def enviar_a_backend(productos):
 
 async def scrape_lenovo(limite=15):
     async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=True)
+        browser = await p.chromium.launch(headless=False)
         context = await browser.new_context(
             user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
         )

@@ -4,7 +4,7 @@ import re
 from playwright.async_api import async_playwright
 
 def enviar_a_backend(productos):
-    url = "http://backend_api:3000/productos"
+    url = "http://localhost:3000/productos"
     for producto in productos:
         try:
             if not producto.get("url"): continue
@@ -15,17 +15,41 @@ def enviar_a_backend(productos):
 
 async def scrape_ebay(limite=5):
     async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=True)
+        browser = await p.chromium.launch(headless=False)
         context = await browser.new_context(
-            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
+            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
+            locale="en-US",
+            timezone_id="America/New_York",
+            viewport={"width": 1280, "height": 800},
+            extra_http_headers={
+                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+                "Accept-Language": "en-US,en;q=0.5",
+                "Accept-Encoding": "gzip, deflate, br",
+                "Connection": "keep-alive",
+                "Upgrade-Insecure-Requests": "1",
+                "Sec-Fetch-Dest": "document",
+                "Sec-Fetch-Mode": "navigate",
+                "Sec-Fetch-Site": "none",
+                "Sec-Fetch-User": "?1",
+            }
         )
         page = await context.new_page()
-        await page.add_init_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
+        await page.add_init_script("""
+            Object.defineProperty(navigator, 'webdriver', {get: () => undefined});
+            Object.defineProperty(navigator, 'plugins', {get: () => [1, 2, 3]});
+            Object.defineProperty(navigator, 'languages', {get: () => ['en-US', 'en']});
+            window.chrome = { runtime: {} };
+        """)
         
         results = []
 
         try:
             print(">>> 🔍 Accediendo a eBay...")
+            # Paso 1: entrar primero a la página principal para parecer humano
+            await page.goto("https://www.ebay.com", wait_until="domcontentloaded")
+            await asyncio.sleep(2)
+
+            # Paso 2: navegar a la búsqueda como si el usuario escribiera
             await page.goto("https://www.ebay.com/sch/i.html?_nkw=thinkpad", wait_until="domcontentloaded")
             await asyncio.sleep(3)
 

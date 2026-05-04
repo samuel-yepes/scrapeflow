@@ -4,7 +4,7 @@ import re
 from playwright.async_api import async_playwright
 
 def enviar_a_backend(productos):
-    url = "http://backend_api:3000/productos"
+    url = "http://localhost:3000/productos"
     for producto in productos:
         try:
             if not producto.get("url"): continue
