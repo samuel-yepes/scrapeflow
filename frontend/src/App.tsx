@@ -290,18 +290,25 @@ const GLOBAL_STYLES = `
   }
   .sf-store-card:hover .sf-store-card-icon { transform: scale(1.08); }
   .sf-store-card-num {
-    font-family: var(--mono); font-size: 11px;
-    color: rgba(255,255,255,0.15); letter-spacing: 0.05em;
-    line-height: 1;
+    font-family: var(--mono);
+    font-size: 13px; /* 🔥 más grande */
+    color: rgba(255,255,255,0.55); /* 🔥 más visible */
+    letter-spacing: 0.05em;
   }
   .sf-store-card-body { position: relative; z-index: 1; }
   .sf-store-card-name {
-    font-family: var(--sans); font-size: 15px; font-weight: 700;
-    color: var(--text); line-height: 1.2; margin-bottom: 4px;
+    font-family: var(--sans);
+  font-size: 18px; /* 🔥 más grande */
+  font-weight: 800; /* 🔥 más marcado */
+  color: #ffffff; /* 🔥 blanco real */
+  line-height: 1.3;
+  margin-bottom: 6px;
   }
   .sf-store-card-sub {
-    font-family: var(--sans); font-size: 11px;
-    color: var(--muted); line-height: 1.4;
+    font-family: var(--sans);
+  font-size: 13px; /* 🔥 más grande */
+  color: rgba(255,255,255,0.75); /* 🔥 mucho más visible */
+  line-height: 1.5;
   }
   .sf-store-card-footer {
     display: flex; align-items: center; justify-content: space-between;
@@ -311,9 +318,11 @@ const GLOBAL_STYLES = `
     margin-top: 2px;
   }
   .sf-store-card-action {
-    font-family: var(--mono); font-size: 9px;
-    color: rgba(255,255,255,0.2); letter-spacing: 0.12em;
-    text-transform: uppercase; transition: color 0.18s;
+    font-family: var(--mono);
+  font-size: 12px; /* 🔥 más grande */
+  color: rgba(255,255,255,0.7); /* 🔥 visible */
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   }
   .sf-store-card:hover .sf-store-card-action { color: var(--card-color, rgba(0,229,160,0.7)); }
   .sf-store-card-arrow {
@@ -356,7 +365,7 @@ const GLOBAL_STYLES = `
   .sf-feat-h2 em { font-style: normal; color: var(--green); }
   .sf-feat-right-meta { text-align: right; flex-shrink: 0; }
   .sf-feat-big-num { font-family: var(--mono); font-size: 96px; font-weight: 700; color: rgba(0,229,160,0.06); line-height: 0.95; letter-spacing: -0.04em; }
-  .sf-feat-right-label { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; }
+  .sf-feat-right-label { font-family: var(--mono); font-size: 15px; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; }
   .sf-feat-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
   .sf-feat-card {
     background: var(--bg2); border: 1px solid var(--border); border-radius: 14px;
@@ -369,7 +378,7 @@ const GLOBAL_STYLES = `
   .sf-feat-icon-wrap { width: 54px; height: 54px; border-radius: 12px; border: 1px solid var(--border); background: rgba(0,229,160,0.05); color: var(--green); display: flex; align-items: center; justify-content: center; margin-bottom: 24px; transition: all 0.2s; }
   .sf-feat-card:hover .sf-feat-icon-wrap { background: rgba(0,229,160,0.12); border-color: rgba(0,229,160,0.4); }
   .sf-feat-name { font-family: var(--sans); font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 10px; letter-spacing: -0.01em; }
-  .sf-feat-desc { font-family: var(--sans); font-size: 13px; color: var(--muted); line-height: 1.7; max-width: 90%; }
+  .sf-feat-desc { font-family: var(--sans); font-size: 18px; color: var(--muted); line-height: 1.7; max-width: 90%; }
   .sf-feat-card-num { position: absolute; bottom: 20px; right: 24px; font-family: var(--mono); font-size: 32px; font-weight: 700; color: rgba(255,255,255,0.04); line-height: 1; }
 `;
 
@@ -442,7 +451,7 @@ function Home() {
                 </div>
                 <div className="sf-store-card-footer">
                   <span className="sf-store-card-action">Explorar</span>
-                  <ExternalLink size={13} className="sf-store-card-arrow" />
+                  <ExternalLink size={20} className="sf-store-card-arrow" />
                 </div>
               </button>
             ))}

@@ -55,8 +55,11 @@ function LenovoView() {
       {/* Header Corporativo Refinado */}
       <header className="max-w-[1600px] mx-auto mb-12 flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div className="space-y-1">
-          <h1 className="text-5xl font-black text-slate-900 tracking-tight">
-            Think<span className="text-red-600">Inventory</span>
+          <h1 className="text-5xl font-black tracking-tight">
+            <span className="text-black">Lenovo </span>
+            <span className="text-[#00e5a0] drop-shadow-[0_0_30px_rgba(0,229,160,0.3)]">
+              Stock
+            </span>
           </h1>
         </div>
         
@@ -65,7 +68,7 @@ function LenovoView() {
             <span className="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">Equipos Activos</span>
             <p className="text-lg font-black text-slate-700 leading-none">{productosFiltrados.length}</p>
           </div>
-          <div className="h-10 w-10 rounded-2xl bg-red-50 flex items-center justify-center text-red-600 font-bold">
+          <div className="h-10 w-10 rounded-2xl bg-[#00e5a0]/10 flex items-center justify-center text-[#00e5a0] border border-[#00e5a0]/20 font-bold">
             <Box size={20} />
           </div>
         </div>
@@ -79,11 +82,11 @@ function LenovoView() {
           <div className="bg-white p-8 rounded-[40px] border border-slate-200/60 shadow-[0_8px_30px_rgb(0,0,0,0.02)] sticky top-10">
             <div className="flex items-center justify-between mb-10">
               <h3 className="text-lg font-black text-slate-900 flex items-center gap-3">
-                <Filter size={20} className="text-red-600" /> Filtros
+                <Filter size={20} className="text-[#00e5a0]" /> Filtros
               </h3>
               <button 
                 onClick={resetFiltros}
-                className="p-2 rounded-xl hover:bg-slate-50 text-slate-400 hover:text-red-600 transition-all active:scale-95"
+                className="p-2 rounded-xl hover:bg-slate-50 text-slate-400 hover:text-[#00e5a0] transition-all active:scale-95"
               >
                 <RotateCcw size={18} />
               </button>
@@ -94,13 +97,13 @@ function LenovoView() {
               <div>
                 <label className="text-[11px] font-bold uppercase text-slate-500 tracking-widest mb-4 block">Modelo o Serie</label>
                 <div className="relative group">
-                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-red-500 transition-colors" size={18} />
+                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#00e5a0] transition-colors" size={18} />
                   <input 
                     type="text"
                     value={busqueda}
                     onChange={(e) => setBusqueda(e.target.value)}
                     placeholder="ThinkPad, Legion..."
-                    className="w-full bg-slate-50 border-none rounded-2xl py-4 pl-12 pr-4 text-sm focus:ring-2 focus:ring-red-500/10 outline-none transition-all placeholder:text-slate-300 font-medium"
+                    className="w-full bg-slate-50 border-none rounded-2xl py-4 pl-12 pr-4 text-sm focus:ring-2 focus:ring-[#00e5a0]/20 outline-none transition-all placeholder:text-slate-300 font-medium"
                   />
                 </div>
               </div>
@@ -109,7 +112,7 @@ function LenovoView() {
               <div>
                 <div className="flex justify-between items-end mb-4">
                   <label className="text-[11px] font-bold uppercase text-slate-500 tracking-widest">Presupuesto</label>
-                  <span className="text-xs font-black px-2 py-1 bg-red-50 text-red-600 rounded-lg">
+                  <span className="text-xs font-black px-2.5 py-1 bg-[#00e5a0] text-black rounded-lg shadow-sm">
                     ${(filtroPrecio / 1000000).toFixed(1)}M
                   </span>
                 </div>
@@ -120,7 +123,7 @@ function LenovoView() {
                   step="100000"
                   value={filtroPrecio}
                   onChange={(e) => setFiltroPrecio(Number(e.target.value))}
-                  className="w-full h-1.5 bg-slate-100 rounded-full appearance-none cursor-pointer accent-red-600"
+                  className="w-full h-1.5 bg-slate-100 rounded-full appearance-none cursor-pointer accent-[#00e5a0]"
                 />
                 <div className="flex justify-between mt-3 text-[10px] font-bold">
                   <span className="text-slate-300">$0</span>
@@ -163,15 +166,15 @@ function LenovoView() {
                 return (
                   <article
                     key={p._id}
-                    className="group bg-white rounded-[40px] border border-slate-200/60 shadow-[0_10px_40px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_60px_rgba(220,38,38,0.08)] transition-all duration-700 hover:-translate-y-2 flex flex-col overflow-hidden"
+                    className="group bg-white rounded-[40px] border border-slate-200/60 shadow-[0_10px_40px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_60px_rgba(0,229,160,0.1)] transition-all duration-700 hover:-translate-y-2 flex flex-col overflow-hidden"
                   >
                     {/* Visual de Producto */}
                     <div className="relative h-60 p-10 flex items-center justify-center">
                       <div className="absolute top-6 left-6 z-10 flex items-center gap-2">
-                         <span className="bg-slate-900 text-white text-[10px] font-black px-4 py-2 rounded-2xl shadow-xl flex items-center gap-2">
-                           <Tag size={12} className="text-red-500" />
-                           STOCK
-                         </span>
+                          <span className="bg-slate-900 text-white text-[10px] font-black px-4 py-2 rounded-2xl shadow-xl flex items-center gap-2">
+                            <Tag size={12} className="text-[#00e5a0]" />
+                            STOCK
+                          </span>
                       </div>
                       <img
                         src={p.imagen ? `http://localhost:3000/proxy-imagen?url=${encodeURIComponent(p.imagen)}` : ""}
@@ -183,7 +186,7 @@ function LenovoView() {
 
                     {/* Información */}
                     <div className="px-8 pb-8 flex-1 flex flex-col">
-                      <h2 className="text-base font-bold text-slate-800 line-clamp-2 mb-6 min-h-[3rem] group-hover:text-red-600 transition-colors">
+                      <h2 className="text-base font-bold text-slate-900 line-clamp-2 mb-6 min-h-[3rem] transition-colors">
                         {p.nombre}
                       </h2>
 
@@ -207,7 +210,7 @@ function LenovoView() {
                           href={p.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="h-14 w-14 flex items-center justify-center rounded-3xl bg-slate-900 text-white hover:bg-red-600 transition-all shadow-lg shadow-slate-200 active:scale-90"
+                          className="h-14 w-14 flex items-center justify-center rounded-3xl bg-slate-900 text-[#00e5a0] border border-[#00e5a0]/40 hover:bg-[#00e5a0] hover:text-black transition-all shadow-lg shadow-slate-200 active:scale-90"
                         >
                           <ExternalLink size={22} />
                         </a>
@@ -227,7 +230,7 @@ function LenovoView() {
 function CompactSpec({ icon, value }: { icon: any, value: string }) {
   return (
     <div className="flex items-center gap-3 p-3 rounded-2xl bg-[#fbfcfd] border border-slate-100/50">
-      <div className="text-red-500 shrink-0">{icon}</div>
+      <div className="text-[#00e5a0] shrink-0">{icon}</div>
       <span className="text-[11px] font-bold text-slate-600 truncate" title={value}>{value}</span>
     </div>
   );

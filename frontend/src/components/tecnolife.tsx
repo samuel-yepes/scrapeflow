@@ -64,23 +64,21 @@ function TecnoclifeView() {
       <header className="max-w-[1600px] mx-auto mb-10 flex flex-col md:flex-row md:items-center justify-between gap-4 pb-5 border-b border-slate-100">
         <div className="flex items-center gap-3">
           {/* Pequeño acento visual */}
-          <span className="h-8 w-1 bg-blue-600 rounded-full"></span>
           <div className="space-y-0.5">
-            <nav className="text-[10px] font-bold text-blue-600 uppercase tracking-[0.2em] font-mono">Local Marketplace Monitor</nav>
             <h1 className="text-3xl font-black text-slate-950 tracking-tighter">
-              Tecno<span className="text-blue-600">clife</span>
+              Tecnolife<span className="text-[#00e5a0] drop-shadow-[0_0_30px_rgba(0,229,160,0.3)]">Stock</span>
             </h1>
           </div>
         </div>
         
         {/* Sección de Resultados - INTEGRADA Y SUTIL (Sin cuadrado 3D) */}
         <div className="flex items-center gap-3 text-sm border border-slate-100 bg-white py-2 px-4 rounded-full shadow-inner">
-          <Box size={16} className="text-blue-500" />
+          <Box size={16} className="text-[#00e5a0]" />
           <p className="font-medium text-slate-600">
             <span className="font-bold text-slate-950">{productosFiltrados.length}</span>
             <span className="text-slate-500"> equipos detectados en stock</span>
           </p>
-          {loading && <span className="h-2 w-2 rounded-full bg-blue-500 animate-pulse transition-all"></span>}
+          {loading && <span className="h-2 w-2 rounded-full bg-[#00e5a0] animate-pulse transition-all"></span>}
         </div>
       </header>
 
@@ -92,11 +90,11 @@ function TecnoclifeView() {
           <div className="bg-white p-8 rounded-[40px] border border-slate-200/60 shadow-[0_8px_30px_rgb(0,0,0,0.02)] sticky top-10">
             <div className="flex items-center justify-between mb-10">
               <h3 className="text-lg font-black text-slate-900 flex items-center gap-3">
-                <Filter size={20} className="text-blue-600" /> Filtros
+                <Filter size={20} className="text-[#00e5a0]" /> Filtros
               </h3>
               <button 
                 onClick={resetFiltros}
-                className="p-2 rounded-xl hover:bg-slate-50 text-slate-400 hover:text-blue-600 transition-all active:scale-95"
+                className="p-2 rounded-xl hover:bg-slate-50 text-slate-400 hover:text-[#00e5a0] transition-all active:scale-95"
               >
                 <RotateCcw size={18} />
               </button>
@@ -107,13 +105,13 @@ function TecnoclifeView() {
               <div>
                 <label className="text-[11px] font-bold uppercase text-slate-500 tracking-widest mb-4 block">Modelo o Componente</label>
                 <div className="relative group">
-                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-500 transition-colors" size={18} />
+                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#00e5a0] transition-colors" size={18} />
                   <input 
                     type="text"
                     value={busqueda}
                     onChange={(e) => setBusqueda(e.target.value)}
                     placeholder="Search hardware..."
-                    className="w-full bg-slate-50 border-none rounded-2xl py-4 pl-12 pr-4 text-sm focus:ring-2 focus:ring-blue-500/20 outline-none transition-all placeholder:text-slate-300 font-medium"
+                    className="w-full bg-slate-50 border-none rounded-2xl py-4 pl-12 pr-4 text-sm focus:ring-2 focus:ring-[#00e5a0]/20 outline-none transition-all placeholder:text-slate-300 font-medium"
                   />
                 </div>
               </div>
@@ -122,8 +120,8 @@ function TecnoclifeView() {
               <div>
                 <div className="flex justify-between items-end mb-4">
                   <label className="text-[11px] font-bold uppercase text-slate-500 tracking-widest">Presupuesto (COP)</label>
-                  <span className="text-xs font-black px-2 py-1 bg-blue-50 text-blue-600 rounded-lg">
-                    ${(filtroPrecio / 1000000).toFixed(1)}M
+                  <span className="text-xs font-black px-2.5 py-1 bg-[#00e5a0] text-black rounded-lg shadow-sm">
+                     ${(filtroPrecio / 1000000).toFixed(1)}M
                   </span>
                 </div>
                 <input 
@@ -133,7 +131,7 @@ function TecnoclifeView() {
                   step="100000"
                   value={filtroPrecio}
                   onChange={(e) => setFiltroPrecio(Number(e.target.value))}
-                  className="w-full h-1.5 bg-slate-100 rounded-full appearance-none cursor-pointer accent-blue-600"
+                  className="w-full h-1.5 bg-slate-100 rounded-full appearance-none cursor-pointer accent-[#00e5a0]"
                 />
                 <div className="flex justify-between mt-3 text-[10px] font-bold">
                   <span className="text-slate-300">$0</span>
@@ -176,15 +174,15 @@ function TecnoclifeView() {
                 return (
                   <article
                     key={p._id}
-                    className="group bg-white rounded-[40px] border border-slate-200/60 shadow-[0_10px_40px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_60px_rgba(37,99,235,0.08)] transition-all duration-700 hover:-translate-y-2 flex flex-col overflow-hidden"
+                    className="group bg-white rounded-[40px] border border-slate-200/60 shadow-[0_10px_40px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_60px_rgba(0,229,160,0.1)] transition-all duration-700 hover:-translate-y-2 flex flex-col overflow-hidden"
                   >
                     {/* Visual */}
                     <div className="relative h-60 p-10 flex items-center justify-center">
                       <div className="absolute top-6 left-6 z-10 flex items-center gap-2">
-                         <span className="bg-slate-900 text-white text-[10px] font-black px-4 py-2 rounded-2xl shadow-xl flex items-center gap-2">
-                           <Tag size={12} className="text-blue-400" />
+                          <span className="bg-slate-900 text-white text-[10px] font-black px-4 py-2 rounded-2xl shadow-xl flex items-center gap-2">
+                            <Tag size={12} className="text-[#00e5a0]" />
                             STOCK
-                         </span>
+                          </span>
                       </div>
                       <img
                         src={p.imagen || "https://via.placeholder.com/400x300?text=Hardware"}
@@ -196,7 +194,7 @@ function TecnoclifeView() {
 
                     {/* Info */}
                     <div className="px-8 pb-8 flex-1 flex flex-col">
-                      <h2 className="text-base font-bold text-slate-800 line-clamp-2 mb-6 min-h-[3rem] group-hover:text-blue-600 transition-colors">
+                      <h2 className="text-base font-bold text-slate-900 line-clamp-2 mb-6 min-h-[3rem] transition-colors">
                         {p.nombre}
                       </h2>
 
@@ -220,7 +218,7 @@ function TecnoclifeView() {
                           href={p.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="h-14 w-14 flex items-center justify-center rounded-3xl bg-slate-900 text-white hover:bg-blue-600 transition-all shadow-lg shadow-slate-200 active:scale-90"
+                          className="h-14 w-14 flex items-center justify-center rounded-3xl bg-slate-900 text-[#00e5a0] border border-[#00e5a0]/40 hover:bg-[#00e5a0] hover:text-black transition-all shadow-lg shadow-slate-200 active:scale-90"
                         >
                           <ExternalLink size={22} />
                         </a>
@@ -240,7 +238,7 @@ function TecnoclifeView() {
 function CompactSpec({ icon, value }: { icon: any, value: string }) {
   return (
     <div className="flex items-center gap-3 p-3 rounded-2xl bg-[#fbfcfd] border border-slate-100/50">
-      <div className="text-blue-500 shrink-0">{icon}</div>
+      <div className="text-[#00e5a0] shrink-0">{icon}</div>
       <span className="text-[11px] font-bold text-slate-600 truncate" title={value}>{value}</span>
     </div>
   );

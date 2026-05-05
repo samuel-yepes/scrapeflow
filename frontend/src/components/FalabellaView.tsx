@@ -1,12 +1,12 @@
 import { useEffect, useState, useMemo } from "react";
-import { ExternalLink, Cpu, HardDrive, Monitor, Layers, Box, Filter, Search, RotateCcw, Tag } from "lucide-react"; 
+import { ExternalLink, Cpu, HardDrive, Monitor, Layers, Box, Filter, Search, RotateCcw, Tag } from "lucide-react";
 import type { Producto } from "../types/Producto";
 import { obtenerProductos } from "../services/productos";
 
 function FalabellaView() {
   const [productos, setProductos] = useState<Producto[]>([]);
   const [loading, setLoading] = useState(true);
-  
+
   const [filtroPrecio, setFiltroPrecio] = useState<number>(0);
   const [busqueda, setBusqueda] = useState("");
   const [maxPrecioOriginal, setMaxPrecioOriginal] = useState(0);
@@ -58,17 +58,20 @@ function FalabellaView() {
       {/* Header Refinado */}
       <header className="max-w-[1600px] mx-auto mb-12 flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div className="space-y-1">
-          <h1 className="text-5xl font-black text-slate-900 tracking-tight">
-            Falabella <span className="text-slate-300 font-light">Stock</span>
+          <h1 className="text-5xl font-black tracking-tight">
+            <span className="text-black">Falabella </span>
+            <span className="text-[#00e5a0] drop-shadow-[0_0_30px_rgba(0,229,160,0.3)]">
+              Stock
+            </span>
           </h1>
         </div>
-        
+
         <div className="flex items-center gap-4 bg-white p-2 pl-5 rounded-3xl border border-slate-200 shadow-sm">
           <div className="flex flex-col">
             <span className="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">Resultados activos</span>
             <p className="text-lg font-black text-slate-700 leading-none">{productosFiltrados.length}</p>
           </div>
-          <div className="h-10 w-10 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-600 font-bold">
+          <div className="h-10 w-10 rounded-2xl bg-[#00e5a0]/10 flex items-center justify-center text-[#00e5a0] border border-[#00e5a0]/20 font-bold">
             <Box size={20} />
           </div>
         </div>
@@ -76,17 +79,17 @@ function FalabellaView() {
 
       {/* Layout Principal con Max Width Extendido */}
       <div className="max-w-[1600px] mx-auto grid grid-cols-1 xl:grid-cols-5 gap-10">
-        
+
         {/* SIDEBAR DE FILTROS */}
         <aside className="xl:col-span-1 space-y-6">
           <div className="bg-white p-8 rounded-[40px] border border-slate-200/60 shadow-[0_8px_30px_rgb(0,0,0,0.02)] sticky top-10">
             <div className="flex items-center justify-between mb-10">
               <h3 className="text-lg font-black text-slate-900 flex items-center gap-3">
-                <Filter size={20} className="text-indigo-600" /> Filtros
+                <Filter size={20} className="text-[#00e5a0]" /> Filtros
               </h3>
-              <button 
+              <button
                 onClick={resetFiltros}
-                className="p-2 rounded-xl hover:bg-slate-50 text-slate-400 hover:text-indigo-600 transition-all active:scale-95"
+                className="p-2 rounded-xl hover:bg-slate-50 text-slate-400 hover:text-[#00e5a0] transition-all active:scale-95"
               >
                 <RotateCcw size={18} />
               </button>
@@ -97,13 +100,13 @@ function FalabellaView() {
               <div>
                 <label className="text-[11px] font-bold uppercase text-slate-500 tracking-widest mb-4 block">Palabra Clave</label>
                 <div className="relative group">
-                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-indigo-500 transition-colors" size={18} />
-                  <input 
+                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#00e5a0] transition-colors" size={18} />
+                  <input
                     type="text"
                     value={busqueda}
                     onChange={(e) => setBusqueda(e.target.value)}
                     placeholder="MacBook, Dell..."
-                    className="w-full bg-slate-50 border-none rounded-2xl py-4 pl-12 pr-4 text-sm focus:ring-2 focus:ring-indigo-500/20 outline-none transition-all placeholder:text-slate-300 font-medium"
+                    className="w-full bg-slate-50 border-none rounded-2xl py-4 pl-12 pr-4 text-sm focus:ring-2 focus:ring-[#00e5a0]/20 outline-none transition-all placeholder:text-slate-300 font-medium"
                   />
                 </div>
               </div>
@@ -112,18 +115,18 @@ function FalabellaView() {
               <div>
                 <div className="flex justify-between items-end mb-4">
                   <label className="text-[11px] font-bold uppercase text-slate-500 tracking-widest">Presupuesto</label>
-                  <span className="text-xs font-black px-2 py-1 bg-indigo-50 text-indigo-600 rounded-lg">
+                  <span className="text-xs font-black px-2.5 py-1 bg-[#00e5a0] text-black rounded-lg shadow-sm">
                     ${(filtroPrecio / 1000000).toFixed(1)}M
                   </span>
                 </div>
-                <input 
+                <input
                   type="range"
                   min="0"
                   max={maxPrecioOriginal}
                   step="100000"
                   value={filtroPrecio}
                   onChange={(e) => setFiltroPrecio(Number(e.target.value))}
-                  className="w-full h-1.5 bg-slate-100 rounded-full appearance-none cursor-pointer accent-indigo-600"
+                  className="w-full h-1.5 bg-slate-100 rounded-full appearance-none cursor-pointer accent-[#00e5a0]"
                 />
                 <div className="flex justify-between mt-3">
                   <span className="text-[10px] font-bold text-slate-300">$0</span>
@@ -144,8 +147,8 @@ function FalabellaView() {
                   <div className="p-8 space-y-4">
                     <div className="h-6 bg-slate-100 animate-pulse rounded-lg w-3/4" />
                     <div className="grid grid-cols-2 gap-4">
-                       <div className="h-12 bg-slate-50 animate-pulse rounded-xl" />
-                       <div className="h-12 bg-slate-50 animate-pulse rounded-xl" />
+                      <div className="h-12 bg-slate-50 animate-pulse rounded-xl" />
+                      <div className="h-12 bg-slate-50 animate-pulse rounded-xl" />
                     </div>
                   </div>
                 </div>
@@ -166,15 +169,15 @@ function FalabellaView() {
                 return (
                   <article
                     key={p._id}
-                    className="group bg-white rounded-[40px] border border-slate-200/60 shadow-[0_10px_40px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_60px_rgba(79,70,229,0.1)] transition-all duration-700 hover:-translate-y-2 flex flex-col overflow-hidden"
+                    className="group bg-white rounded-[40px] border border-slate-200/60 shadow-[0_10px_40px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_60px_rgba(0,229,160,0.1)] transition-all duration-700 hover:-translate-y-2 flex flex-col overflow-hidden"
                   >
                     {/* Badge y Visual */}
                     <div className="relative h-60 p-10 flex items-center justify-center">
                       <div className="absolute top-6 left-6 z-10 flex items-center gap-2">
-                         <span className="bg-slate-900 text-white text-[10px] font-black px-4 py-2 rounded-2xl shadow-xl flex items-center gap-2">
-                           <Tag size={12} className="text-indigo-400" />
-                           STOCK
-                         </span>
+                        <span className="bg-slate-900 text-white text-[10px] font-black px-4 py-2 rounded-2xl shadow-xl flex items-center gap-2">
+                          <Tag size={12} className="text-[#00e5a0]" />
+                          STOCK
+                        </span>
                       </div>
                       <img
                         src={p.imagen ? `http://localhost:3000/proxy-imagen?url=${encodeURIComponent(p.imagen)}` : ""}
@@ -186,16 +189,16 @@ function FalabellaView() {
 
                     {/* Información */}
                     <div className="px-8 pb-8 flex-1 flex flex-col">
-                      <h2 className="text-base font-bold text-slate-800 line-clamp-2 mb-6 min-h-[3rem] group-hover:text-indigo-600 transition-colors">
+                      <h2 className="text-base font-bold text-slate-900 line-clamp-2 mb-6 min-h-[3rem] transition-colors">
                         {p.nombre}
                       </h2>
 
                       {/* Specs Compactas */}
                       <div className="grid grid-cols-2 gap-2 mb-8">
-                        <CompactSpec icon={<Cpu size={14}/>} value={mainSpecs.cpu} />
-                        <CompactSpec icon={<Layers size={14}/>} value={mainSpecs.ram} />
-                        <CompactSpec icon={<HardDrive size={14}/>} value={mainSpecs.ssd} />
-                        <CompactSpec icon={<Monitor size={14}/>} value={mainSpecs.pantalla} />
+                        <CompactSpec icon={<Cpu size={14} />} value={mainSpecs.cpu} />
+                        <CompactSpec icon={<Layers size={14} />} value={mainSpecs.ram} />
+                        <CompactSpec icon={<HardDrive size={14} />} value={mainSpecs.ssd} />
+                        <CompactSpec icon={<Monitor size={14} />} value={mainSpecs.pantalla} />
                       </div>
 
                       {/* Footer de Tarjeta */}
@@ -210,7 +213,7 @@ function FalabellaView() {
                           href={p.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="h-14 w-14 flex items-center justify-center rounded-3xl bg-slate-900 text-white hover:bg-indigo-600 transition-all shadow-lg shadow-slate-200 active:scale-90"
+                          className="h-14 w-14 flex items-center justify-center rounded-3xl bg-black text-[#00e5a0] border border-[#00e5a0]/40 hover:bg-[#00e5a0] hover:text-black transition-all shadow-lg shadow-[#00e5a0]/20 active:scale-90"
                         >
                           <ExternalLink size={22} />
                         </a>
@@ -231,7 +234,7 @@ function FalabellaView() {
 function CompactSpec({ icon, value }: { icon: any, value: string }) {
   return (
     <div className="flex items-center gap-3 p-3 rounded-2xl bg-[#fbfcfd] border border-slate-100/50">
-      <div className="text-indigo-500 shrink-0">{icon}</div>
+      <div className="text-[#00e5a0] shrink-0">{icon}</div>
       <span className="text-[11px] font-bold text-slate-600 truncate" title={value}>{value}</span>
     </div>
   );
