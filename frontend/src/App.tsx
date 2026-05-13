@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Globe, Database, ShieldCheck, Zap, Home as HomeIcon, ArrowRight, BarChart2, RefreshCw, Package, Activity, Info, ExternalLink } from "lucide-react";
+import { Globe, Database, ShieldCheck, Zap, Home as HomeIcon, ArrowRight, BarChart2, RefreshCw, Package, Activity, Info, ExternalLink, Scale } from "lucide-react";
 import FalabellaView from "./components/FalabellaView";
 import LenovoView from "./components/lenovo";
 import TecnoclifeView from "./components/tecnolife";
 import Ebay from "./components/ebay";
 import InformacionView from "./components/informationView";
+import ComparativaView from "./components/comparativaView";
 
 const GLOBAL_STYLES = `
   @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
@@ -493,8 +494,9 @@ function Home() {
       case "Falabella": return <FalabellaView />;
       case "Lenovo": return <LenovoView />;
       case "Ebay": return <Ebay />;
-      case "Tecnoclife": return <TecnoclifeView />;
+      case "Tec  **Highlight de Ahorro:** La tabla calcula automáticamente el `Math.min` de los precios del grupo y resalta en verde cuál es la tienda más barnoclife": return <TecnoclifeView />;
       case "Información": return <InformacionView />;
+      case "Comparación": return <ComparativaView />;
       default: return renderLanding();
     }
   };
@@ -522,7 +524,18 @@ function Home() {
               <HomeIcon size={13} />
               Dashboard
             </button>
+
+            {/* BOTÓN NUEVO */}
+            <button
+              className={`sf-nav-btn ${tiendaSeleccionada === "Comparación" ? "active" : ""}`}
+              onClick={() => setTiendaSeleccionada("Comparación")}
+            >
+              <Scale size={13} />
+              Comparativa
+            </button>
+
             <div className="sf-nav-divider" />
+
             <button
               className={`sf-nav-btn-info ${tiendaSeleccionada === "Información" ? "active" : ""}`}
               onClick={() => setTiendaSeleccionada("Información")}
