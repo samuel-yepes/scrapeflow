@@ -6,6 +6,7 @@ import TecnoclifeView from "./components/tecnolife";
 import Ebay from "./components/ebay";
 import InformacionView from "./components/informationView";
 import ComparativaView from "./components/comparativaView";
+import ChatBot from "./components/chatbot";
 
 const GLOBAL_STYLES = `
   @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
@@ -554,6 +555,7 @@ function Home() {
       </header>
 
       {renderVista()}
+      <ChatBot />
 
       <footer className="sf-footer">
         <div className="sf-footer-left">© 2026 <em>ScrapeFlow</em> — Herramienta de Auditoría de Hardware</div>
