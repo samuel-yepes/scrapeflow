@@ -66,7 +66,7 @@ Puedo ayudarte a encontrar:
 
         try {
 
-            const res = await fetch("http://localhost:3000/chat-ia", {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/chat-ia`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

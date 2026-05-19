@@ -19,16 +19,21 @@ const ComparativaView: React.FC = () => {
   const [tiendaSeleccionada, setTiendaSeleccionada] = useState<string>("TODAS");
 
   useEffect(() => {
-    fetch("http://localhost:3000/productos")
+    fetch(`${import.meta.env.VITE_API_URL}/productos`)
       .then((res) => res.json())
       .then((data: Producto[]) => {
-        // Normalizamos los precios a COP para la lógica de comparación
+
         const dataNormalizada = data.map(p => ({
           ...p,
-          precioNormalizado: p.tienda.toLowerCase() === 'ebay' ? p.precio * TASA_CAMBIO : p.precio
+          precioNormalizado:
+            p.tienda.toLowerCase() === 'ebay'
+              ? p.precio * TASA_CAMBIO
+              : p.precio
         }));
+
         setProductos(dataNormalizada);
         setLoading(false);
+
       })
       .catch(err => console.error("Error fetching:", err));
   }, []);
@@ -39,8 +44,8 @@ const ComparativaView: React.FC = () => {
 
   // Lógica de Filtrado y Estadísticas
   const productosFiltrados = useMemo(() => {
-    return tiendaSeleccionada === "TODAS" 
-      ? productos 
+    return tiendaSeleccionada === "TODAS"
+      ? productos
       : productos.filter(p => p.tienda === tiendaSeleccionada);
   }, [productos, tiendaSeleccionada]);
 
@@ -60,7 +65,7 @@ const ComparativaView: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#080808] text-slate-300 p-4 md:p-10 font-sans">
-      
+
       {/* 1. SECCIÓN DE ESTADÍSTICAS RÁPIDAS */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
         <div className="bg-[#111] border border-white/5 p-6 rounded-2xl">
@@ -94,7 +99,7 @@ const ComparativaView: React.FC = () => {
         <div className="flex items-center gap-4">
           <div className="bg-[#1a1a1a] px-4 py-2 rounded-xl border border-white/10 flex items-center gap-3">
             <Filter size={16} className="text-slate-500" />
-            <select 
+            <select
               value={tiendaSeleccionada}
               onChange={(e) => setTiendaSeleccionada(e.target.value)}
               className="bg-transparent text-sm font-bold text-white outline-none cursor-pointer"
@@ -135,9 +140,8 @@ const ComparativaView: React.FC = () => {
                       </div>
                     </td>
                     <td className="p-5 text-center">
-                      <span className={`text-[10px] font-black px-2 py-1 rounded-md uppercase border ${
-                        esEbay ? 'border-blue-500/50 text-blue-400' : 'border-[#71b33c]/50 text-[#71b33c]'
-                      }`}>
+                      <span className={`text-[10px] font-black px-2 py-1 rounded-md uppercase border ${esEbay ? 'border-blue-500/50 text-blue-400' : 'border-[#71b33c]/50 text-[#71b33c]'
+                        }`}>
                         {p.tienda}
                       </span>
                     </td>
