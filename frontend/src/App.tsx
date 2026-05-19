@@ -492,13 +492,26 @@ function Home() {
 
   const renderVista = () => {
     switch (tiendaSeleccionada) {
-      case "Falabella": return <FalabellaView />;
-      case "Lenovo": return <LenovoView />;
-      case "Ebay": return <Ebay />;
-      case "Tec  **Highlight de Ahorro:** La tabla calcula automáticamente el `Math.min` de los precios del grupo y resalta en verde cuál es la tienda más barnoclife": return <TecnoclifeView />;
-      case "Información": return <InformacionView />;
-      case "Comparación": return <ComparativaView />;
-      default: return renderLanding();
+      case "Falabella":
+        return <FalabellaView />;
+
+      case "Lenovo":
+        return <LenovoView />;
+
+      case "Ebay":
+        return <Ebay />;
+
+      case "Tecnoclife":
+        return <TecnoclifeView />;
+
+      case "Información":
+        return <InformacionView />;
+
+      case "Comparación":
+        return <ComparativaView />;
+
+      default:
+        return renderLanding();
     }
   };
 
