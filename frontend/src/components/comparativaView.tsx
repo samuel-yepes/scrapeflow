@@ -134,7 +134,7 @@ const ComparativaView: React.FC = () => {
                     <td className="p-5">
                       <div className="flex items-center gap-4">
                         <div className="w-12 h-12 bg-white rounded-lg p-1 flex-shrink-0">
-                          <img src={`http://localhost:3000/proxy-imagen?url=${encodeURIComponent(p.imagen)}`} alt="" className="w-full h-full object-contain" />
+                          <img src={`${import.meta.env.VITE_API_URL}/proxy-imagen?url=${encodeURIComponent(p.imagen)}`} alt="" className="w-full h-full object-contain" />
                         </div>
                         <span className="text-sm font-bold text-white leading-snug max-w-[200px] block">{p.nombre}</span>
                       </div>

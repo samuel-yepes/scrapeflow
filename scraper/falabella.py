@@ -4,7 +4,7 @@ import pandas as pd
 from playwright.async_api import async_playwright
 
 def enviar_a_backend(productos):
-    url = "http://localhost:3000/productos"
+    url = "https://scrapeflow-sm3v.onrender.com/productos"
     for producto in productos:
         try:
             if not producto.get("url"): continue

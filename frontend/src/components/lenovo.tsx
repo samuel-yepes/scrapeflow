@@ -177,7 +177,7 @@ function LenovoView() {
                           </span>
                       </div>
                       <img
-                        src={p.imagen ? `http://localhost:3000/proxy-imagen?url=${encodeURIComponent(p.imagen)}` : ""}
+                        src={p.imagen ? `${import.meta.env.VITE_API_URL}/proxy-imagen?url=${encodeURIComponent(p.imagen)}` : ""}
                         alt={p.nombre}
                         className="h-full w-full object-contain group-hover:scale-110 transition-transform duration-700 ease-out"
                         onError={(e) => (e.currentTarget.src = "https://via.placeholder.com/400x300?text=Lenovo")}
