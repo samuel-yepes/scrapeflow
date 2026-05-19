@@ -4,6 +4,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const Groq = require("groq-sdk");
+const PORT = process.env.PORT || 3000;
 
 const app = express();
 
@@ -190,4 +191,6 @@ app.get("/proxy-imagen", async (req, res) => {
   }
 });
 
-app.listen(3000, () => console.log("Servidor corriendo en puerto 3000"));
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en puerto ${PORT}`);
+});
