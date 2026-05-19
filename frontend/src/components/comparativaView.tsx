@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from "react";
-import { ExternalLink, ArrowUpDown, Filter, DollarSign, TrendingDown, TrendingUp, Zap } from "lucide-react";
+import { ExternalLink, Filter, TrendingDown, TrendingUp, Zap } from "lucide-react";
 
 interface Producto {
   _id: string;

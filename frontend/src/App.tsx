@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Globe, Database, ShieldCheck, Zap, Home as HomeIcon, ArrowRight, BarChart2, RefreshCw, Package, Activity, Info, ExternalLink, Scale } from "lucide-react";
+import { Globe, Database, ShieldCheck, Zap, Home as HomeIcon, BarChart2, RefreshCw, Package, Info, ExternalLink, Scale } from "lucide-react";
 import FalabellaView from "./components/FalabellaView";
 import LenovoView from "./components/lenovo";
 import TecnoclifeView from "./components/tecnolife";

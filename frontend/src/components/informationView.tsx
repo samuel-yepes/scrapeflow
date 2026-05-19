@@ -1,15 +1,7 @@
 import React from "react";
 import { 
   Cpu, 
-  Lock, 
   Server, 
-  ShieldAlert,
-  ShieldCheck, 
-  Database, 
-  Globe, 
-  Zap,
-  Activity,
-  GitBranch,
   Shield
 } from "lucide-react";
 
