@@ -572,7 +572,6 @@ function Home() {
 
       <footer className="sf-footer">
         <div className="sf-footer-left">© 2026 <em>ScrapeFlow</em> — Herramienta de Auditoría de Hardware</div>
-        <div className="sf-footer-right">BUILD 2026.05 · ALL SYSTEMS OPERATIONAL</div>
       </footer>
     </div>
   );

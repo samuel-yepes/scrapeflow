@@ -432,10 +432,22 @@ const ComparativaView: React.FC = () => {
           border: 1px solid; white-space: nowrap;
         }
 
-        .price-original { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+        .price-original {
+          font-family: var(--mono);
+          font-size: 12px;
+          color: rgba(232,232,240,0.92); /* más claro para mejor legibilidad */
+          font-weight: 600;
+          opacity: 0.95;
+        }
         .price-cop {
-          font-family: var(--mono); font-size: 14px; font-weight: 700;
-          color: var(--text); display: flex; flex-direction: column; align-items: flex-end;
+          font-family: var(--mono);
+          font-size: 14px;
+          font-weight: 700;
+          color: var(--text);
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          text-shadow: 0 1px 0 rgba(0,0,0,0.2);
         }
         .price-cop.best { color: var(--green); }
         .best-pill {
@@ -450,7 +462,7 @@ const ComparativaView: React.FC = () => {
           background: var(--surface2); border: 1px solid var(--border);
           color: var(--muted); text-decoration: none; transition: all .15s;
         }
-        .link-btn:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+        .link-btn:hover { background: var(--green); border-color: var(--green); color: #fff; }
 
         /* ── Paginación ── */
         .pagination {
