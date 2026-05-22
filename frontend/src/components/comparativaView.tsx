@@ -206,7 +206,7 @@ const ComparativaView: React.FC = () => {
     ];
     return rangos.map((r) => {
       const entry: Record<string, any> = { label: r.label };
-      tiendas.forEach((t, ti) => {
+      tiendas.forEach((t) => {
         entry[t] = productos.filter(
           (p) => p.tienda === t && p.precioNorm >= r.min && p.precioNorm < r.max
         ).length;
