@@ -15,8 +15,12 @@ for scraper in scrapers:
 
     result = subprocess.run(
         [sys.executable, scraper],
-        capture_output=False
+        capture_output=True,
+        text=True
     )
+
+    print(result.stdout)
+    print(result.stderr)
 
     if result.returncode != 0:
         print(f"❌ Error en {scraper}")
