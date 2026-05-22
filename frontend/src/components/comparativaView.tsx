@@ -131,20 +131,27 @@ const ComparativaView: React.FC = () => {
     return productosFiltrados.slice(inicio, inicio + ITEMS_POR_PAGINA);
   }, [productosFiltrados, pagina]);
 
+  // Estadísticas globales (usar TODOS los productos, ignorar precios 0/invalidos)
   const stats = useMemo(() => {
-    if (!productosFiltrados.length) return { min: 0, max: 0, avg: 0 };
-    const p = productosFiltrados.map((x) => x.precioNorm);
+    const valores = productos
+      .map((x) => x.precioNorm)
+      .filter((v) => typeof v === "number" && isFinite(v) && v > 0);
+    if (!valores.length) return { min: 0, max: 0, avg: 0 };
     return {
-      min: Math.min(...p),
-      max: Math.max(...p),
-      avg: Math.round(p.reduce((a, b) => a + b, 0) / p.length),
+      min: Math.min(...valores),
+      max: Math.max(...valores),
+      avg: Math.round(valores.reduce((a, b) => a + b, 0) / valores.length),
     };
-  }, [productosFiltrados]);
+  }, [productos]);
 
-  const mejorGlobal = useMemo(
-    () => [...productos].sort((a, b) => a.precioNorm - b.precioNorm)[0],
-    [productos]
-  );
+  // Mejor oferta global: elegir producto real con precio válido > 0
+  const mejorGlobal = useMemo(() => {
+    const candidatos = productos.filter(
+      (p) => typeof p.precioNorm === "number" && isFinite(p.precioNorm) && p.precioNorm > 0 && p.url && p.nombre
+    );
+    if (!candidatos.length) return null as ProductoNorm | null;
+    return candidatos.reduce((mejor, cur) => (cur.precioNorm < mejor.precioNorm ? cur : mejor));
+  }, [productos]);
 
   // ── Datos para gráficas ────────────────────────────────────────────────────
 
@@ -287,7 +294,7 @@ const ComparativaView: React.FC = () => {
         }
         .page-header h1 {
           font-size: 22px; font-weight: 700; letter-spacing: -.5px;
-          background: linear-gradient(135deg, #e8e8f0 0%, #6366f1 100%);
+          background: linear-gradient(135deg, #e8e8f0 0%, var(--green) 100%);
           -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
         .page-header .subtitle { font-size: 13px; color: var(--muted); margin-top: 2px; }
