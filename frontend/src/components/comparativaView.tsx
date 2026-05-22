@@ -93,13 +93,17 @@ const ComparativaView: React.FC = () => {
       .then((r) => r.json())
       .then((data: Producto[]) => {
         setProductos(
-          data.map((p) => ({
-            ...p,
-            precioNorm:
-              p.tienda.toLowerCase() === "ebay"
-                ? p.precio * TASA_CAMBIO
-                : p.precio,
-          }))
+          data.map((p) => {
+            // asegurar número
+            const precioNum = typeof p.precio === "number" ? p.precio : Number(p.precio) || 0;
+            const moneda = (p.moneda || "").toString().toLowerCase();
+            const tiendaLower = (p.tienda || "").toString().toLowerCase();
+            const esUSD = moneda === "usd" || tiendaLower.includes("ebay");
+            return {
+              ...p,
+              precioNorm: esUSD ? precioNum * TASA_CAMBIO : precioNum,
+            } as ProductoNorm;
+          })
         );
         setLoading(false);
       })
@@ -144,14 +148,14 @@ const ComparativaView: React.FC = () => {
     };
   }, [productos]);
 
-  // Mejor oferta global: elegir producto real con precio válido > 0
-  const mejorGlobal = useMemo(() => {
-    const candidatos = productos.filter(
-      (p) => typeof p.precioNorm === "number" && isFinite(p.precioNorm) && p.precioNorm > 0 && p.url && p.nombre
-    );
-    if (!candidatos.length) return null as ProductoNorm | null;
-    return candidatos.reduce((mejor, cur) => (cur.precioNorm < mejor.precioNorm ? cur : mejor));
+  // Top productos (ordenados ascendente por precioNorm), ignorar precios inválidos
+  const topProducts = useMemo(() => {
+    return productos
+      .filter((p) => typeof p.precioNorm === "number" && isFinite(p.precioNorm) && p.precioNorm > 0 && p.url && p.nombre)
+      .sort((a, b) => a.precioNorm - b.precioNorm);
   }, [productos]);
+
+  const mejorGlobal = topProducts.length ? topProducts[0] : null;
 
   // ── Datos para gráficas ────────────────────────────────────────────────────
 
@@ -533,13 +537,21 @@ const ComparativaView: React.FC = () => {
             <div className="stat-icon"><BarChart2 size={14} color="#6366f1" /> Promedio</div>
             <div className="stat-value">{fmtCOP(stats.avg)}</div>
           </div>
-          {mejorGlobal && (
-            <div className="stat-card accent-card">
-              <div className="stat-icon"><Zap size={14} color="#6366f1" /> Mejor oferta global</div>
-              <div className="stat-value">{mejorGlobal.nombre.slice(0, 36)}{mejorGlobal.nombre.length > 36 ? "…" : ""}</div>
-              <div className="stat-sub">{fmtCOP(mejorGlobal.precioNorm)} · {mejorGlobal.tienda}</div>
+          <div className="stat-card accent-card">
+            <div className="stat-icon"><Zap size={14} color="#6366f1" /> Mejores ofertas</div>
+            <div style={{ marginTop: 6 }}>
+              {topProducts.length === 0 && <div style={{ color: 'var(--muted)', fontSize: 13 }}>No hay ofertas válidas</div>}
+              {topProducts.slice(0, 3).map((t) => (
+                <div key={t._id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
+                  <div style={{ fontSize: 13, color: 'var(--text)', fontWeight: 700 }}>{t.nombre.length > 28 ? t.nombre.slice(0, 28) + '…' : t.nombre}</div>
+                  <div style={{ textAlign: 'right' }}>
+                    <div style={{ fontFamily: 'var(--mono)', fontSize: 13 }}>{fmtCOP(t.precioNorm)}</div>
+                    <div style={{ fontSize: 11, color: 'var(--muted)' }}>{t.tienda}</div>
+                  </div>
+                </div>
+              ))}
             </div>
-          )}
+          </div>
         </div>
 
         {/* ── Gráficas ── */}
