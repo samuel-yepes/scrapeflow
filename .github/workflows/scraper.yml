@@ -21,10 +21,10 @@ jobs:
 
       - name: Instalar dependencias
         run: |
-          pip install -r scraper/requirements.txt
+          pip install -r scrapers/requirements.txt
 
       - name: Ejecutar scrapers
         env:
           MONGO_URI: ${{ secrets.MONGO_URI }}
         run: |
-          python scraper/run_all.py
+          python scrapers/run_all.py
