@@ -17,47 +17,75 @@ export default function InformacionView() {
       <style>{`
         .sf-info-main {
           background: var(--bg);
-          padding: 64px 80px;
+          padding: 32px 16px;
           min-height: calc(100vh - 172px);
           color: var(--text);
         }
 
+        @media (min-width: 768px) {
+          .sf-info-main {
+            padding: 48px 32px;
+          }
+        }
+
+        @media (min-width: 1200px) {
+          .sf-info-main {
+            padding: 64px 80px;
+          }
+        }
+
         .sf-info-grid {
           display: grid;
-          grid-template-columns: 1fr 320px;
-          gap: 40px;
+          grid-template-columns: 1fr;
+          gap: 32px;
           max-width: 1300px;
           margin: 0 auto;
+        }
+
+        @media (min-width: 992px) {
+          .sf-info-grid {
+            grid-template-columns: 1fr 320px;
+            gap: 40px;
+          }
         }
 
         /* Columna Izquierda: Arquitectura */
         .sf-info-left {
           display: flex;
           flex-direction: column;
-          gap: 56px;
+          gap: 40px;
+        }
+
+        @media (min-width: 768px) {
+          .sf-info-left {
+            gap: 56px;
+          }
         }
 
         .sf-info-header {
           display: flex;
           flex-direction: column;
-          gap: 16px;
-        }
-
-        .sf-info-kicker {
-          font-family: var(--mono);
-          font-size: 11px;
-          color: var(--blue);
-          letter-spacing: 0.24em;
-          text-transform: uppercase;
-          opacity: 0.8;
+          gap: 12px;
         }
 
         .sf-info-title {
           font-family: var(--sans);
-          font-size: 42px;
+          font-size: 28px;
           font-weight: 800;
           letter-spacing: -0.025em;
-          line-height: 1.15;
+          line-height: 1.2;
+        }
+
+        @media (min-width: 768px) {
+          .sf-info-title {
+            font-size: 36px;
+          }
+        }
+
+        @media (min-width: 1200px) {
+          .sf-info-title {
+            font-size: 42px;
+          }
         }
 
         .sf-info-title em {
@@ -77,19 +105,39 @@ export default function InformacionView() {
         /* Sección Pipeline */
         .sf-pipeline {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 20px;
+          grid-template-columns: 1fr;
+          gap: 16px;
+        }
+
+        @media (min-width: 640px) {
+          .sf-pipeline {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+
+        @media (min-width: 992px) {
+          .sf-pipeline {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+          }
         }
 
         .sf-pipe-card {
           background: var(--bg2);
           border: 1px solid var(--border);
           border-radius: 16px;
-          padding: 32px;
+          padding: 24px;
           display: flex;
           flex-direction: column;
-          gap: 20px;
+          gap: 16px;
           transition: all 0.22s cubic-bezier(0.16,1,0.3,1);
+        }
+
+        @media (min-width: 1200px) {
+          .sf-pipe-card {
+            padding: 32px;
+            gap: 20px;
+          }
         }
 
         .sf-pipe-card:hover {
@@ -108,6 +156,7 @@ export default function InformacionView() {
           display: flex;
           align-items: center;
           justify-content: center;
+          flex-shrink: 0;
         }
 
         .sf-pipe-title {
@@ -134,13 +183,23 @@ export default function InformacionView() {
 
         .sf-api-row {
           display: flex;
-          align-items: center;
-          justify-content: space-between;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 16px;
           background: rgba(255,255,255,0.02);
           border: 1px solid var(--border);
           border-radius: 12px;
-          padding: 18px 24px;
-          transition: border-color 0.2s;
+          padding: 16px 20px;
+          transition: all 0.2s;
+        }
+
+        @media (min-width: 576px) {
+          .sf-api-row {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 24px;
+          }
         }
 
         .sf-api-row:hover {
@@ -151,14 +210,15 @@ export default function InformacionView() {
         .sf-api-left {
           display: flex;
           align-items: center;
-          gap: 20px;
+          gap: 16px;
+          width: 100%;
         }
 
         .sf-api-dot {
           width: 6px;
           height: 6px;
           border-radius: 50%;
-          box-shadow: 0 0 8px var(--dot-color, var(--green));
+          flex-shrink: 0;
         }
 
         .sf-api-name-block {
@@ -171,18 +231,23 @@ export default function InformacionView() {
           font-family: var(--sans);
           font-size: 14px;
           font-weight: 600;
-        }
-
-        .sf-api-route {
-          font-family: var(--mono);
-          font-size: 10px;
-          color: rgba(232,234,240,0.3);
+          word-break: break-word;
         }
 
         .sf-api-right {
           display: flex;
           align-items: center;
-          gap: 28px;
+          justify-content: flex-between;
+          gap: 24px;
+          width: 100%;
+        }
+
+        @media (min-width: 576px) {
+          .sf-api-right {
+            width: auto;
+            justify-content: flex-end;
+            gap: 28px;
+          }
         }
 
         .sf-api-badge {
@@ -199,22 +264,55 @@ export default function InformacionView() {
           font-family: var(--mono);
           font-size: 11px;
           color: var(--muted);
+          margin-left: auto;
+        }
+
+        @media (min-width: 576px) {
+          .sf-api-latency {
+            margin-left: 0;
+          }
         }
 
         /* Columna Derecha: Sistema y Métricas */
         .sf-info-right {
           display: flex;
           flex-direction: column;
-          gap: 24px;
+          gap: 20px;
           background: var(--bg2);
           border: 1px solid var(--border);
           border-radius: 18px;
-          padding: 28px;
+          padding: 24px;
+        }
+
+        @media (min-width: 640px) and (max-width: 991px) {
+          .sf-info-right {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+          }
+        }
+
+        @media (min-width: 992px) {
+          .sf-info-right {
+            gap: 24px;
+            padding: 28px;
+          }
         }
 
         .sf-metric-box {
           border-bottom: 1px solid rgba(255,255,255,0.05);
-          padding-bottom: 20px;
+          padding-bottom: 16px;
+        }
+
+        @media (min-width: 640px) and (max-width: 991px) {
+          .sf-metric-box {
+            border-bottom: none;
+            padding-bottom: 0;
+            background: rgba(255,255,255,0.01);
+            border: 1px solid rgba(255,255,255,0.03);
+            padding: 16px;
+            border-radius: 12px;
+          }
         }
         
         .sf-metric-box:last-child {
@@ -232,12 +330,18 @@ export default function InformacionView() {
 
         .sf-metric-val {
           font-family: var(--sans);
-          font-size: 22px;
+          font-size: 20px;
           font-weight: 700;
           color: var(--text);
           display: flex;
           align-items: baseline;
           gap: 6px;
+        }
+
+        @media (min-width: 768px) {
+          .sf-metric-val {
+            font-size: 22px;
+          }
         }
         
         .sf-metric-val em {
@@ -309,7 +413,7 @@ export default function InformacionView() {
               {apis.map((api, i) => (
                 <div key={i} className="sf-api-row">
                   <div className="sf-api-left">
-                    <div className="sf-api-dot" style={{ "background": api.color }}></div>
+                    <div className="sf-api-dot" style={{ "background": api.color, "boxShadow": `0 0 8px ${api.color}` }}></div>
                     <div className="sf-api-name-block">
                       <span className="sf-api-name" style={{ color: api.color }}>{api.name}</span>
                     </div>
